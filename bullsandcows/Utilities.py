@@ -1,36 +1,10 @@
-class Number:
-    def __init__(self, number):
-        self.digits = []
-
-        while number > 0:
-            self.digits.append(number % 10)
-            number //= 10
-        self.digits.reverse()
-
-    def __getitem__(self, index):
-        return self.digits[index]
-
-    def __eq__(self, other):
-        return self.digits == other.digits
-
-    def __ne__(self, other):
-        return self.digits != other.digits
-
-    def as_string(self):
-        result = ""
-        for digit in self.digits:
-            result += str(digit)
-
-    def is_valid(self):
-        if len(self.digits) != 4:
+def is_valid(number):
+    if not number.isdigit() or len(number) != 4:
+        return False
+    for digit in number:
+        if number.count(digit) > 1:
             return False
-        for digit in self.digits:
-            if self.digits.count(digit) > 1:
-                return False
-        return True
-
-
-# all_numbers = [Number(number) for number in range(1, 10000) if Number(number).is_valid()]
+    return True
 
 def get_bulls(first, second):
     bulls = 0
@@ -41,7 +15,7 @@ def get_bulls(first, second):
 
 def get_cows(first, second):
     cows = 0
-    for digit in first:
-        if digit in second:
+    for first_digit, second_digit in zip(first, second):
+        if first_digit != second_digit and first_digit in second:
             cows += 1
     return cows
