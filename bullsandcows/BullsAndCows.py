@@ -23,7 +23,12 @@ class BullsAndCows:
                 self.my_guess = False
                 self.moves += 1
 
-                result = self.client.get_result(self.ui.make_guess())
+                guess = self.ui.make_guess()
+
+                if not guess:
+                    break
+
+                result = self.client.get_result(guess)
 
                 if not result:
                     break
