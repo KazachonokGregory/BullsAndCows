@@ -28,7 +28,13 @@ class BullsAndCows:
                 if not guess:
                     break
 
-                result = self.client.get_result(guess)
+                self.ui.wait()
+
+                try:
+                    result = self.client.get_result(guess)
+                except Exception as e:
+                    self.ui.handle_error(e)
+                    break
 
                 if not result:
                     break
@@ -43,13 +49,22 @@ class BullsAndCows:
                 self.moves += 1
 
                 self.ui.wait()
-                guess = self.client.make_guess()
+                try:
+                    guess = self.client.make_guess()
+                except Exception as e:
+                    self.ui.handle_error(e)
+                    break
 
                 result = self.ui.get_result(guess)
                 if not result:
                     break
                 bulls, cows = map(int, result.split(','))
-                self.client.receive_result(result)
+
+                try:
+                    self.client.receive_result(result)
+                except Exception as e:
+                    self.ui.handle_error(e)
+                    break
 
                 if bulls == 4:
                     self.opponent_won = True

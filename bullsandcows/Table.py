@@ -19,7 +19,6 @@ class Table(ttk.Treeview):
 
     def pop_edit(self, idx, column, accept_edit, validate):
         x, y, width, height = self.bbox(item=idx, column=column)
-        print('bbox', x, y)
         vcmd = (self.register(validate),
                 '%d', '%i', '%P', '%s', '%S', '%v', '%V', '%W')
         entry = tk.Entry(self, borderwidth=0, highlightthickness=0,

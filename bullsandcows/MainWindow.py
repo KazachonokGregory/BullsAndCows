@@ -1,8 +1,6 @@
 import tkinter as tk
-from tkinter import messagebox as msg
+from tkinter import messagebox as msgbox
 import config
-import OnlineGame
-import OfflineGame
 from Table import Table
 
 class MainWindow(tk.Tk):
@@ -16,16 +14,10 @@ class MainWindow(tk.Tk):
         self.resizable(True, True)
 
         self.my_table = Table(self)
-#        self.my_table.grid(column=1, row=1, pady=5)
 
         self.opp_table = Table(self)
-#        self.opp_table.grid(column=0, row=1, pady=5)
 
         self.status_bar = tk.Label(self, justify='left')
-#        self.status_bar.grid(column=0, row=0)
-
-#        self.columnconfigure(0, weight=1)
-#        self.rowconfigure(0, weight=1)
 
         self.status_bar.pack(side='top', fill='x')
         self.opp_table.pack(side='left', anchor='nw', fill='y')
@@ -33,12 +25,15 @@ class MainWindow(tk.Tk):
 
         self.set_message('Welcome!')
 
-        self.ask_game_type()
+    def clear(self):
+        self.my_table.delete(*self.my_table.get_children())
+        self.opp_table.delete(*self.opp_table.get_children())
+        self.update()
 
     def set_message(self, message):
         self.status_bar.config(text=message)
 
-    def ask_game_type(self):
+    def game_type_popup(self):
         popup = tk.Toplevel(self)
         popup.title('Choose the game type')
         popup.attributes("-topmost", "true")
@@ -75,6 +70,13 @@ class MainWindow(tk.Tk):
         accept_butt = tk.Button(popup, text='Accept', command=accept_host_port)
         accept_butt.pack()
         self.wait_window(accept_butt)
+
+    def error_popup(self, exception):
+        msgbox.showerror("Error", f"{exception}")
+
+    def after_game_popup(self):
+        new_game = msgbox.askyesno("Game over", "Do you want a new game?")
+        return new_game
 
 
 

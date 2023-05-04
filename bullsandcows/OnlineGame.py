@@ -1,7 +1,5 @@
 import socket
 from Proxy import Proxy
-from ConsoleUI import ConsoleUI
-from GraphicalUI import GraphicalUI
 from BullsAndCows import BullsAndCows
 
 def host_game(host, port, ui):

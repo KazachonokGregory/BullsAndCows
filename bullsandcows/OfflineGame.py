@@ -1,8 +1,5 @@
 from BullsAndCows import BullsAndCows
-from ConsoleUI import ConsoleUI
-from GraphicalUI import GraphicalUI
 from Bot import Bot
-from MainWindow import MainWindow
 
 def play(ui):
     bot = Bot()

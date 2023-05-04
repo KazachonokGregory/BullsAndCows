@@ -31,8 +31,7 @@ class Bot:
         bulls, cows = map(int, result.split(','))
         self.possible_numbers = list(filter(lambda number: bulls == util.get_bulls(self.last_guess, number) and cows == util.get_cows(self.last_guess, number), self.possible_numbers))
         if len(self.possible_numbers) == 0:
-            print("The data given by player is inconsistent!")
-            raise InconsistentInputError
+            raise InconsistentInputError("The data given by player is inconsistent!")
         
     def wait(self):
         pass
