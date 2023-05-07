@@ -1,5 +1,6 @@
 import OnlineGame
 import OfflineGame
+import tkinter as tk
 
 class GraphicalUI:
     def __init__(self, window):
@@ -16,6 +17,8 @@ class GraphicalUI:
                     OnlineGame.connect_to_game(self.window.host_name, self.window.port_name, self)
                 elif self.window.game_type == "bot":
                     OfflineGame.play(self)
+                break
+            except tk.TclError:
                 break
             except Exception as error:
                 self.handle_error(error)
@@ -48,7 +51,7 @@ class GraphicalUI:
             msg += "Your opponent won :("
         elif not i_won and not opponent_won:
             msg += "It was abrupted"
-        self.window.set_message(msg)
+            self.window.set_message(msg)
 
         if self.window.after_game_popup():
             self.new_game()

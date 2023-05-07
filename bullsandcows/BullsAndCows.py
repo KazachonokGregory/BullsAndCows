@@ -55,6 +55,9 @@ class BullsAndCows:
                     self.ui.handle_error(e)
                     break
 
+                if not guess:
+                    break
+
                 result = self.ui.get_result(guess)
                 if not result:
                     break

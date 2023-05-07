@@ -25,6 +25,8 @@ class MainWindow(tk.Tk):
 
         self.set_message('Welcome!')
 
+        self.active_widgets = []
+
     def clear(self):
         self.my_table.delete(*self.my_table.get_children())
         self.opp_table.delete(*self.opp_table.get_children())
@@ -51,6 +53,7 @@ class MainWindow(tk.Tk):
                 self.ask_host_port()
         accept_butt = tk.Button(popup, text='Accept', command=accept_game_type)
         accept_butt.pack()
+        self.active_widgets.append(accept_butt)
         self.wait_window(accept_butt)
 
     def ask_host_port(self):
@@ -69,6 +72,7 @@ class MainWindow(tk.Tk):
             popup.destroy()
         accept_butt = tk.Button(popup, text='Accept', command=accept_host_port)
         accept_butt.pack()
+        self.active_widgets.append(accept_butt)
         self.wait_window(accept_butt)
 
     def error_popup(self, exception):
@@ -78,5 +82,8 @@ class MainWindow(tk.Tk):
         new_game = msgbox.askyesno("Game over", "Do you want a new game?")
         return new_game
 
-
+    def destroy(self):
+        for widget in self.active_widgets:
+            widget.destroy()
+        super().destroy()
 

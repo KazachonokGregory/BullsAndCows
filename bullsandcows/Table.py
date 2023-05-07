@@ -16,6 +16,7 @@ class Table(ttk.Treeview):
         self.column(2, width=50, stretch=False)
         self.config(selectmode="none")
         self.guess = None
+        self.active_widgets = []
 
     def pop_edit(self, idx, column, accept_edit, validate):
         x, y, width, height = self.bbox(item=idx, column=column)
@@ -28,6 +29,7 @@ class Table(ttk.Treeview):
         entry.focus_set()
         entry.grab_set()
         entry.bind("<Return>", accept_edit)
+        self.active_widgets.append(entry)
         self.wait_window(entry)
 
 
@@ -86,3 +88,7 @@ class Table(ttk.Treeview):
             return True
         return value_if_allowed.isdigit() and len(value_if_allowed) == 1 and int(value_if_allowed) <= 4
 
+    def destroy(self):
+        for widget in self.active_widgets:
+            widget.destroy()
+        super().destroy()
