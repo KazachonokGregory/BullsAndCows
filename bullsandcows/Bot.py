@@ -12,7 +12,7 @@ class Bot:
 
     def start_game(self):
         self.possible_numbers = []
-        for i in range(10000):
+        for i in range(10 ** util.DIGIT_COUNT):
             if util.is_valid(str(i)):
                 self.possible_numbers.append(str(i))
         self.secret_number = random.choice(self.possible_numbers)

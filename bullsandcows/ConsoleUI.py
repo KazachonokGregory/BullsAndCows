@@ -9,7 +9,7 @@ class ConsoleUI:
     """
     def make_guess(self):
         while True:
-            guess_str = input("Enter your guess (a 4-digit number): ")
+            guess_str = input(f"Enter your guess (a {util.DIGIT_COUNT}-digit number): ")
             if util.is_valid(guess_str):
                 return guess_str
 
@@ -21,7 +21,7 @@ class ConsoleUI:
             try:
                 result = input(f"Your opponent says {guess}. How many bulls,cows ? ")
                 bulls, cows = map(int, result.split(','))
-                if bulls < 0 or cows < 0 or bulls + cows > 4:
+                if bulls < 0 or cows < 0 or bulls + cows > util.DIGIT_COUNT:
                     raise ValueError
                 return result
             except ValueError:

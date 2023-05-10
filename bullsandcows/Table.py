@@ -62,7 +62,7 @@ class Table(ttk.Treeview):
 
     def accept_bulls(self, event):
         bulls = event.widget.get()
-        if not bulls.isdigit() or int(bulls) > 4:
+        if not bulls.isdigit() or int(bulls) > util.DIGIT_COUNT:
             return
         event.widget.destroy()
         self.bulls = bulls
@@ -71,7 +71,7 @@ class Table(ttk.Treeview):
 
     def accept_cows(self, event):
         cows = event.widget.get()
-        if not cows.isdigit() or int(cows) > 4:
+        if not cows.isdigit() or int(cows) > util.DIGIT_COUNT:
             return
         event.widget.destroy()
         self.cows = cows
@@ -86,7 +86,7 @@ class Table(ttk.Treeview):
             prior_value, text, validation_type, trigger_type, widget_name):
         if value_if_allowed == "":
             return True
-        return value_if_allowed.isdigit() and len(value_if_allowed) == 1 and int(value_if_allowed) <= 4
+        return value_if_allowed.isdigit() and len(value_if_allowed) == 1 and int(value_if_allowed) <= util.DIGIT_COUNT
 
     def destroy(self):
         for widget in self.active_widgets:

@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox as msgbox
-import config
 from Table import Table
+
+DEFAULT_HOST = "localhost"
+DEFAULT_PORT = "9999"
 
 class MainWindow(tk.Tk):
 
@@ -10,7 +12,6 @@ class MainWindow(tk.Tk):
 
         self.title("Bulls & Cows")
         self.geometry("500x400")
-        self.configure(bg=config.primary_color)
         self.resizable(True, True)
 
         self.my_table = Table(self)
@@ -62,8 +63,8 @@ class MainWindow(tk.Tk):
         popup.attributes("-topmost", "true")
         host_name = tk.Entry(popup)
         port_name = tk.Entry(popup)
-        host_name.insert(0, "localhost")
-        port_name.insert(0, "9999")
+        host_name.insert(0, DEFAULT_HOST)
+        port_name.insert(0, DEFAULT_PORT)
         host_name.pack(anchor='w')
         port_name.pack(anchor='w')
         def accept_host_port(event=None):

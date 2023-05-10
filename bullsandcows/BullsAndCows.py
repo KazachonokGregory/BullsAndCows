@@ -42,7 +42,7 @@ class BullsAndCows:
                 bulls, cows = map(int, result.split(','))
                 self.ui.receive_result(result)
 
-                if bulls == 4:
+                if bulls == util.DIGIT_COUNT:
                     self.i_won = True
             else:
                 self.my_guess = True
@@ -69,7 +69,7 @@ class BullsAndCows:
                     self.ui.handle_error(e)
                     break
 
-                if bulls == 4:
+                if bulls == util.DIGIT_COUNT:
                     self.opponent_won = True
             
         self.ui.end_game(self.i_won, self.opponent_won, self.moves)
