@@ -1,5 +1,5 @@
 from MainWindow import MainWindow
-from GraphicalUI import GraphicalUI
+from UI import GraphicalUI
 
 if __name__ == "__main__":
     app = MainWindow()

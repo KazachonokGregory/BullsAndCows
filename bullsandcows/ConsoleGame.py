@@ -1,6 +1,6 @@
 import OnlineGame
 import OfflineGame
-from ConsoleUI import ConsoleUI
+from UI import ConsoleUI
 import Utilities as util
 
 if __name__ == "__main__":

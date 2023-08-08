@@ -1,12 +1,9 @@
+import time
 import Bot
 from BullsAndCows import BullsAndCows
-import Utilities as util
-from BotUI import BotUI
-import time
+from UI import BotUI
 
-"""
-The most intelligent game ever played
-"""
+# The most intelligent game ever played
 if __name__ == "__main__":
     while (True):
         good_boy = Bot.SmartBot()
