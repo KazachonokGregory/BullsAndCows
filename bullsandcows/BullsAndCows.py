@@ -71,7 +71,7 @@ class BullsAndCows:
 
                 if bulls == util.DIGIT_COUNT:
                     self.opponent_won = True
-            
+        
         self.ui.end_game(self.i_won, self.opponent_won, self.moves)
         self.client.close()
 

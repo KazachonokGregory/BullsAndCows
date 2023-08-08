@@ -1,5 +1,8 @@
 import Utilities as util
 import random
+import math
+
+INF = 1e18
 
 class InconsistentInputError(ValueError):
     pass
@@ -15,11 +18,12 @@ class Bot:
         for i in range(10 ** util.DIGIT_COUNT):
             if util.is_valid(str(i)):
                 self.possible_numbers.append(str(i))
+        random.shuffle(self.possible_numbers)
         self.secret_number = random.choice(self.possible_numbers)
         self.last_guess = None
 
     def make_guess(self):
-        self.last_guess = random.choice(self.possible_numbers)
+        self.last_guess = self.possible_numbers[0]
         return self.last_guess
 
     def get_result(self, guess):
@@ -40,4 +44,34 @@ class Bot:
         pass
 
     def close(self):
-        print(f"Bot's secret number was {self.secret_number}")
+        pass
+
+class SmartBot(Bot):
+    def make_guess(self):
+        if self.last_guess is None:
+            self.last_guess = self.possible_numbers[0]
+            return self.last_guess
+
+        max_entropy = -INF
+        for guess in self.possible_numbers:
+            distribution = {}
+            for number in self.possible_numbers:
+                result = util.get_result(number, guess)
+                if (result not in distribution):
+                    distribution.update({result:0})
+                distribution[result] += 1
+
+            entropy = 0
+            for key, value in distribution.items():
+                value /= len(self.possible_numbers)
+                entropy -= value * math.log(value)
+
+            if entropy > max_entropy:
+                self.last_guess = guess
+                max_entropy = entropy
+
+        if len(self.possible_numbers) == 1:
+            pass
+
+        return self.last_guess
+

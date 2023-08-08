@@ -28,3 +28,6 @@ def get_cows(first, second):
         if first_digit != second_digit and first_digit in second:
             cows += 1
     return cows
+
+def get_result(first, second):
+    return (get_bulls(first, second), get_cows(first, second))
