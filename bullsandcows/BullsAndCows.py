@@ -39,7 +39,7 @@ class BullsAndCows:
                 if not result:
                     break
 
-                bulls, cows = map(int, result.split(','))
+                bulls, cows = result[0], result[1]
                 self.ui.receive_result(result)
 
                 if bulls == util.DIGIT_COUNT:
@@ -61,7 +61,7 @@ class BullsAndCows:
                 result = self.ui.get_result(guess)
                 if not result:
                     break
-                bulls, cows = map(int, result.split(','))
+                bulls, cows = result[0], result[1]
 
                 try:
                     self.client.receive_result(result)

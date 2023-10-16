@@ -98,19 +98,12 @@ class BotUI(UI):
                 return guess_str
 
     def get_result(self, guess):
-        while True:
-            try:
-                result = self.bot.get_result(guess)
-                bulls, cows = map(int, result.split(','))
-                print(f"Your opponent says {guess}. How many bulls,cows ? {result}")
-                if bulls < 0 or cows < 0 or bulls + cows > util.DIGIT_COUNT:
-                    raise ValueError
-                return result
-            except ValueError:
-                print("Invalid input")
+        result = self.bot.get_result(guess)
+        print(f"Your opponent says {guess}. How many bulls,cows ? {result}")
+        return result
 
     def receive_result(self, result):
-        bulls, cows = map(int, result.split(','))
+        bulls, cows = result[0], result[1]
         self.bot.receive_result(result)
         print(f"There are {bulls} bulls and {cows} cows")
 
@@ -149,16 +142,17 @@ class ConsoleUI(UI):
     def get_result(self, guess):
         while True:
             try:
-                result = input(f"Your opponent says {guess}. How many bulls,cows ? ")
-                bulls, cows = map(int, result.split(','))
-                if bulls < 0 or cows < 0 or bulls + cows > util.DIGIT_COUNT:
+                result_str = input(f"Your opponent says {guess}. How many bulls,cows ? ")
+                bulls, cows = map(int, result_str.split(','))
+                result = (bulls, cows)
+                if not util.valid(result):
                     raise ValueError
                 return result
             except ValueError:
                 print("Invalid input")
 
     def receive_result(self, result):
-        bulls, cows = map(int, result.split(','))
+        bulls, cows = result[0], result[1]
         print(f"There are {bulls} bulls and {cows} cows")
 
     def wait(self):

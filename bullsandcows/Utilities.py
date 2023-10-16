@@ -31,3 +31,9 @@ def get_cows(first, second):
 
 def get_result(first, second):
     return (get_bulls(first, second), get_cows(first, second))
+
+def valid(result):
+    bulls, cows = result[0], result[1]
+    if bulls < 0 or cows < 0 or bulls + cows > DIGIT_COUNT:
+        return False
+    return True

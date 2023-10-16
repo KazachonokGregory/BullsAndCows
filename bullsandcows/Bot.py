@@ -1,6 +1,6 @@
-import Utilities as util
 import random
 import math
+import Utilities as util
 
 INF = 1e18
 
@@ -29,11 +29,10 @@ class Bot:
     def get_result(self, guess):
         bulls = util.get_bulls(self.secret_number, guess)
         cows = util.get_cows(self.secret_number, guess)
-        return str(bulls) + "," + str(cows)
+        return (bulls, cows)
 
     def receive_result(self, result):
-        bulls, cows = map(int, result.split(','))
-        self.possible_numbers = list(filter(lambda number: bulls == util.get_bulls(self.last_guess, number) and cows == util.get_cows(self.last_guess, number), self.possible_numbers))
+        self.possible_numbers = list(filter(lambda number: util.get_result(number, self.last_guess) == result, self.possible_numbers))
         if len(self.possible_numbers) == 0:
             raise InconsistentInputError("The data given by player is inconsistent!")
         

@@ -49,7 +49,7 @@ class Table(ttk.Treeview):
         self.master.update()
 
     def receive_result(self, result):
-        bulls, cows = map(int, result.split(','))
+        bulls, cows = result[0], result[1]
         self.item(self.lst, values=(self.guess, bulls, cows))
         self.master.update()
 
@@ -58,7 +58,7 @@ class Table(ttk.Treeview):
         self.lst = self.insert("", tk.END, values=(guess, "?", "?"))
         self.pop_edit(self.lst, 1, self.accept_bulls, self.validate_bulls_cows)
         self.pop_edit(self.lst, 2, self.accept_cows, self.validate_bulls_cows)
-        return str(self.bulls) + ',' + str(self.cows)
+        return (self.bulls, self.cows)
 
     def accept_bulls(self, event):
         bulls = event.widget.get()
